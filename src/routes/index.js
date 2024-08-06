@@ -1,9 +1,8 @@
 //INDEX ROUTES
 const router = require("express").Router();
 
-const User = require('./user.row.routes'); //import routes user
+const user = require("./user.routes");
 
-router.use('/user', User) //url user
+router.use("/users", user)
 
-module.exports = router //exports router
-//module ini di import di index.js depan
+module.exports = router

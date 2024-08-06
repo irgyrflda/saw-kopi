@@ -9,5 +9,4 @@ const kopi =
 ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░░░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░░░░╚═╝
 
 `
-
-module.exports = { kopi };
+module.exports = kopi

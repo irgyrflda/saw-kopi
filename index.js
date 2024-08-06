@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 const errorHandler = require("./src/middleware/errorHandler");
 const { documentation } = require("./public/documentation-api/documentation-api");
 const { cekSecretKey } = require("./src/middleware/authorization");
-const { kopi } = require("./src/utils/listen");
+const kopi = require("./src/utils/listen");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,14 +22,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/documentation-api', documentation)
-app.use('/api-v1', cekSecretKey, indexRouter);
+app.use('/api-v1', indexRouter);
 
 app.use(errorHandler);
 
 db.authenticate()
   .then(() => {
     app.listen(PORT, console.log(
-      kopi
+      kopi, 
       `server running...on Port ${PORT}`
     ));
   })

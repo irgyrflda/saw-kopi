@@ -1,15 +1,11 @@
 const {
-    GetAllRow,
-    GetByIdRow,
-    CreateRow,
-    UpdateRow,
-    DeleteByIdRow
-} = require('./user.row.controller');
+    login,
+    register,
+    logout
+} = require('./user.controller');
 
 module.exports = {
-    GetAllRow,
-    GetByIdRow,
-    CreateRow,
-    UpdateRow,
-    DeleteByIdRow
+    login,
+    register,
+    logout
 }

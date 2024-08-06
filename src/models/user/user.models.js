@@ -4,14 +4,24 @@ const { DataTypes } = require("sequelize");
 const User = db.define(
     "User",
     {
-        id_user: {
-            type: DataTypes.INTEGER(11),
+        username: {
+            type: DataTypes.STRING(12),
             allowNull: false,
             primaryKey: true,
         },
-        nama: {
+        password: {
             type: DataTypes.STRING(50),
+            allowNull: false,
+        },
+        role: {
+            type: DataTypes.STRING(50),
+            defaultValue: "user",
             allowNull: true,
+        },
+        is_login: {
+            type: DataTypes.TINYINT(1),
+            defaultValue: 0,
+            allowNull: true
         }
     },
     {

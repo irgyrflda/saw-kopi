@@ -43,7 +43,7 @@ exports.documentation = (req, res, next) => {
                 <div class="container">
                     <h1>WELCOME TO DOCUMENTATION PDF SERVICE!!</h1>
                     <h3>Klik here 
-                        <a href=https://example.com class="button">Documentation</a>
+                        <a href=https://documenter.getpostman.com/view/19307895/2sA3rzHrxh class="button">Documentation</a>
                     </h3>
                 </div>
             </body>
