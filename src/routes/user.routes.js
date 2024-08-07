@@ -4,9 +4,10 @@ const {
     register,
     logout
 } = require("../controller/user");
+const { cekSecretKey } = require("../middleware/authorization");
 
 router.post("/login", login);
 router.post("/register", register);
-router.post("/logout", logout);
+router.post("/logout", cekSecretKey, logout);
 
 module.exports = router;

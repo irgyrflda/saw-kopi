@@ -95,14 +95,10 @@ const register = (req, res) => {
 }
 
 const logout = (req, res) => {
-    const username = req.body.username
-    const headersKey = req.headers.secret_key
+    const username = req.headers.username
 
     if (!username) {
         return jsonFormat(res, statusCode.found, "failed", "Username tidak boleh kosong")
-    }
-    if (!headersKey) {
-        return jsonFormat(res, statusCode.unauthorized, "failed", "Unauthorized")
     }
 
     User.findOne({
