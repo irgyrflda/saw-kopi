@@ -6,7 +6,7 @@ const Kriteria = db.define(
     {
         id_kriteria: {
             type: DataTypes.INTEGER(11),
-            allowNull: false,
+            allowNull: true,
             primaryKey: true,
         },
         kriteria: {
@@ -14,9 +14,13 @@ const Kriteria = db.define(
             allowNull: false,
         },
         bobot_kriteria: {
-            type: DataTypes.DECIMAL(2, 2),
+            type: DataTypes.FLOAT(),
             allowNull: true
-        }
+        },
+        keterangan_kriteria: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+        },
     },
     {
         timestamps: false,

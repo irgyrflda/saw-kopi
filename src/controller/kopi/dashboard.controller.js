@@ -13,10 +13,10 @@ const dataDashboard = async (req, res) => {
     })
         .then((respon) => {
             if (!respon) {
-                return jsonFormat(res, statusCode.found, "failed", "Data tidak ditemukan")
+                return jsonFormat(res, statusCode.noContent, "failed", "Data tidak ditemukan")
             }
             if (respon.length === 0) {
-                return jsonFormat(res, statusCode.found, "failed", "Data tidak ditemukan")
+                return jsonFormat(res, statusCode.noContent, "failed", "Data tidak ditemukan")
             }
             return jsonFormat(res, statusCode.ok, "success", "Berhasil memuat data", respon)
         }).catch((error) => {

@@ -1,23 +1,23 @@
 const db = require("../../config/database");
 const { DataTypes } = require("sequelize");
 
-const Alternatif = db.define(
-    "Alternatif",
+const Kepentingan = db.define(
+    "Kepentingan",
     {
-        id_alternatif: {
+        id_rating_bobot: {
             type: DataTypes.INTEGER(11),
             allowNull: true,
             primaryKey: true,
         },
-        alternatif: {
-            type: DataTypes.STRING(100),
+        nilai_rating_bobot: {
+            type: DataTypes.DECIMAL(2, 2),
             allowNull: false,
         }
     },
     {
         timestamps: false,
-        tableName: 'm_alternatif',
+        tableName: 'm_rating_bobot'
     }
 )
 
-module.exports = Alternatif;
+module.exports = Kepentingan;
