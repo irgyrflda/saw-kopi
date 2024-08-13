@@ -1,0 +1,827 @@
+{
+	"info": {
+		"_postman_id": "81c3664c-7856-4609-8dae-dfa1071f4ca0",
+		"name": "spk-saw-kopi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19307895"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user123\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/users/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin123\",\r\n    \"password\": \"password123\",\r\n    \"confrimasi_password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/users/register",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "secret_key",
+								"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+								"type": "text"
+							},
+							{
+								"key": "username",
+								"value": "admin123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/users/logout",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kopi",
+			"item": [
+				{
+					"name": "alternatif",
+					"item": [
+						{
+							"name": "get all alternatif",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"alternatif"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create alternatif",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"alternatif\": \"kopi 10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"alternatif"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get alternatif by id alternatif",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/alternatif/:id_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"alternatif",
+										":id_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_alternatif",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete alternatif by id alternatif",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/alternatif/:id_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"alternatif",
+										":id_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_alternatif",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update alternatif by id alternatif",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"alternatif\": \"Kopi 0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/alternatif/:id_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"alternatif",
+										":id_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_alternatif",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "kriteria",
+					"item": [
+						{
+							"name": "get all kriteria",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/kriteria",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"kriteria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create kriteria",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"kriteria\": \"plerr\",\r\n    \"bobot_kriteria\": 15,\r\n    \"keterangan_kriteria\": \"cost\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/kriteria",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"kriteria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get kriteria by id_kriteria",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/kriteria/:id_kriteria",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"kriteria",
+										":id_kriteria"
+									],
+									"variable": [
+										{
+											"key": "id_kriteria",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete kriteria by id_kriteria",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/kriteria/:id_kriteria",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"kriteria",
+										":id_kriteria"
+									],
+									"variable": [
+										{
+											"key": "id_kriteria",
+											"value": "21"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update kriteria by id_kriteria",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"kriteria\": \"Harga\",\r\n    \"bobot_kriteria\": 10,\r\n    \"keterangan_kriteria\": \"cost\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/kriteria/:id_kriteria",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"kriteria",
+										":id_kriteria"
+									],
+									"variable": [
+										{
+											"key": "id_kriteria",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "dashboard",
+					"item": [
+						{
+							"name": "get all kriteria data dashboard",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									},
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/dashboard",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "nilai alternatif",
+					"item": [
+						{
+							"name": "get all nilai alternatif",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/nilai-alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"nilai-alternatif"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create nilai alternatif",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_alternatif\": 1,\r\n    \"id_kriteria\": 2,\r\n    \"nilai_alternatif\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/nilai-alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"nilai-alternatif"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bulk create nilai alternatif",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nilai_alternatif\": [\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 1,\r\n            \"nilai_alternatif\": 3\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 2,\r\n            \"nilai_alternatif\": 5\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 3,\r\n            \"nilai_alternatif\": 0\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 4,\r\n            \"nilai_alternatif\": 8\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 6,\r\n            \"nilai_alternatif\": 8\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 7,\r\n            \"nilai_alternatif\": 3\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 8,\r\n            \"nilai_alternatif\": 5\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 9,\r\n            \"nilai_alternatif\": 0\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 10,\r\n            \"nilai_alternatif\": 8\r\n        },\r\n        {\r\n            \"id_alternatif\": 2,\r\n            \"id_kriteria\": 11,\r\n            \"nilai_alternatif\": 8\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/bulk-nilai-alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"bulk-nilai-alternatif"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by id nilai alternatif",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/nilai-alternatif/:id_nilai_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"nilai-alternatif",
+										":id_nilai_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_nilai_alternatif",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete by id nilai alternatif",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/nilai-alternatif/:id_nilai_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"nilai-alternatif",
+										":id_nilai_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_nilai_alternatif",
+											"value": "83"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete bulk by id alternatif",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/bulk-nilai-alternatif/:id_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"bulk-nilai-alternatif",
+										":id_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_alternatif",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update by id nilai alternatif",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nilai_alternatif\": 8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/kopi/nilai-alternatif/:id_nilai_alternatif",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"nilai-alternatif",
+										":id_nilai_alternatif"
+									],
+									"variable": [
+										{
+											"key": "id_nilai_alternatif",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "proses perhitungan",
+					"item": [
+						{
+							"name": "get proses perhitungan",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "user123",
+										"type": "text"
+									},
+									{
+										"key": "secret_key",
+										"value": "$awdaAdsnajsJybwauydnajsK131uhbakuO0dt",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/kopi/proses-perhitungan",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"kopi",
+										"proses-perhitungan"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:4004/api-v1"
+		}
+	]
+}
