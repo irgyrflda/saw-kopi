@@ -1,10 +1,10 @@
 const { jsonFormat } = require("../../utils/jsonFormat");
 const { statusCode } = require("../../utils/statusCode");
 const { QueryTypes } = require("sequelize");
-const { Alternatif, Kriteria } = require("../../models/kopi");
+const { Alternatif, Kriteria, TrxHasil } = require("../../models/kopi");
 const db = require("../../config/database");
 
-const getProsesPerhitungan = async (req, res) => {
+const getProsesPerhitungan = async (req, res, next) => {
     try {
         const dataAlternatif = await Alternatif.findAll({
             attributes: ["id_alternatif"]
@@ -150,7 +150,7 @@ const getProsesPerhitungan = async (req, res) => {
         }
 
         const perangkingan = await db.query(`
-        SELECT a.id_alternatif, a.alternatif, a.hasil
+        SELECT a.id_alternatif, a.alternatif, CAST(a.hasil AS FLOAT) hasil
         FROM (SELECT a.id_alternatif, a.alternatif,
         SUM((a.nilai_rating_bobot * a.nilai_normalisasi)) hasil
         FROM (SELECT b.id_alternatif, b.alternatif, c.id_kriteria, c.kriteria, c.bobot_kriteria, c.keterangan_kriteria, c.nilai_rating_bobot,
@@ -183,13 +183,36 @@ const getProsesPerhitungan = async (req, res) => {
             return jsonFormat(res, statusCode.badRequest, "failed", "Pastikan semua data alternatif memiliki nilai kriteria[6]")
         }
 
+        const dataExHasil = await TrxHasil.findAll()
+
+        const urutanTrx = (dataExHasil.length === 0) ? 0 : parseInt(dataExHasil[dataExHasil.length - 1].urutan_trx)
+        const totalExHasil = await TrxHasil.findOne({
+            attributes: [
+                [db.fn('SUM', db.col('hasil')), 'hasil']
+            ],
+            where: {
+                urutan_trx: urutanTrx
+            }
+        });
+
+        const urutanEx = urutanTrx
+        const urutanNew = urutanTrx + 1
+        const totalNewHasil = perangkingan.reduce((accumulator, currentValue) => accumulator + currentValue.hasil,
+            0,);
+
+
+        const totalEx = parseFloat(totalExHasil.hasil).toFixed(3)
+        const totalNew = totalNewHasil.toFixed(3)
+
         let rankings = []
+
         perangkingan.forEach((a, i) => {
-            let no = 1
+            const no = 1
             rankings.push({
                 id_alternatif: a.id_alternatif,
                 alternatif: a.alternatif,
-                hasil: a.hasil,
+                urutan_trx: (totalEx !== totalNew) ? urutanNew : urutanEx,
+                hasil: parseFloat(a.hasil),
                 rangking: no + i
             })
         })
@@ -202,11 +225,27 @@ const getProsesPerhitungan = async (req, res) => {
             perangkingan: rankings
         }
 
-        return jsonFormat(res, statusCode.ok, "success", "Berhasil hore", dataRes)
+        if (dataExHasil.length === 0 ||
+            totalEx !== totalNew
+        ) {
+            try {
+                const postHasil = TrxHasil.bulkCreate(rankings)
+                if (!postHasil) {
+                    return jsonFormat(res, statusCode.badRequest, "failed", "Gagal membuat nilai akhir perangkingan")
+                }
+
+                return jsonFormat(res, statusCode.ok, "success", "Berhasil hore", dataRes)
+            } catch (error) {
+                next(error);
+            }
+        }
+
+
+        return jsonFormat(res, statusCode.ok, "success", "Berhasil memuat data", dataRes)
 
     } catch (error) {
         console.log("error get data normalisasi : ", error);
-        throw error
+        next(error)
     }
 }
 

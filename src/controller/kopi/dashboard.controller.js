@@ -4,11 +4,21 @@ const { statusCode } = require("../../utils/statusCode");
 const { QueryTypes } = require('sequelize');
 
 const dataDashboard = async (req, res) => {
-    await db.query(`SELECT "Data Alternatif" object, COUNT(id_alternatif) total_data
+    await db.query(`SELECT "Data Alternatif" object, CAST(COUNT(id_alternatif) AS INT) total_data,
+    "Total data alternatif" keterangan
     FROM m_alternatif
     UNION ALL
-    SELECT "Data Kriteria" object, COUNT(id_kriteria) total_data
-    FROM m_kriteria`, {
+    SELECT "Data Kriteria" object, CAST(COUNT(id_kriteria) AS INT) total_data,
+    "Total data kriteria" keterangan
+    FROM m_kriteria
+    UNION ALL
+    SELECT "Data hasil perhitungan" object , CAST(MAX(urutan_trx) AS INT) total_data,
+    "Total data hasil perhitungan" keterangan
+    FROM trx_hasil
+	UNION ALL 
+	SELECT "Data nilai alternatif", COUNT(id_alternatif) total_data,
+    "Total data nilai alternatif (PASTIKAN NILAI ALTERNATIF PADA SETIAP KRITERIA TERISI SEMUA!!)" keterangan
+    FROM trx_nilai_alternatif`, {
         type: QueryTypes.SELECT
     })
         .then((respon) => {

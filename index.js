@@ -8,7 +8,7 @@ const db = require("./src/config/database");
 const PORT = process.env.PORT;
 const errorHandler = require("./src/middleware/errorHandler");
 const { documentation } = require("./public/documentation-api/documentation-api");
-const { cekSecretKey } = require("./src/middleware/authorization");
+// const { cekSecretKey } = require("./src/middleware/authorization");
 const kopi = require("./src/utils/listen");
 
 app.use(bodyParser.urlencoded({ extended: false }));
