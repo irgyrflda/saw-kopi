@@ -22,17 +22,17 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/documentation-api', documentation)
-app.use('/api-v1', indexRouter);
+// app.use('/api-v1', indexRouter);
 
 app.use(errorHandler);
 
-db.authenticate()
-  .then(() => {
-    app.listen(PORT, console.log(
-      kopi, 
-      `server running...on Port ${PORT}`
-    ));
-  })
-  .catch((error) => {
-    console.error("Unable to connect to the database: ", error);
-  });
+// db.authenticate()
+//   .then(() => {
+app.listen(PORT, console.log(
+  kopi,
+  `server running...on Port ${PORT}`
+));
+// })
+// .catch((error) => {
+//   console.error("Unable to connect to the database: ", error);
+// });
