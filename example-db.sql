@@ -58,27 +58,6 @@ INSERT INTO `m_kriteria` (`id_kriteria`, `kriteria`, `bobot_kriteria`, `keterang
 	(10, 'Kepadatan', 5, 'benefit', 0.05),
 	(11, 'Harga', 10, 'cost', 0.09);
 
--- Dumping structure for table db_spk_saw_kopi.m_rating_bobot
-CREATE TABLE IF NOT EXISTS `m_rating_bobot` (
-  `id_rating_bobot` int(11) NOT NULL AUTO_INCREMENT,
-  `nilai_rating_bobot` decimal(2,2) DEFAULT NULL,
-  PRIMARY KEY (`id_rating_bobot`),
-  KEY `Index 2` (`id_rating_bobot`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping data for table db_spk_saw_kopi.m_rating_bobot: ~10 rows (approximately)
-INSERT INTO `m_rating_bobot` (`id_rating_bobot`, `nilai_rating_bobot`) VALUES
-	(1, 0.18),
-	(2, 0.14),
-	(3, 0.09),
-	(4, 0.14),
-	(6, 0.09),
-	(7, 0.09),
-	(8, 0.09),
-	(9, 0.05),
-	(10, 0.05),
-	(11, 0.09);
-
 -- Dumping structure for table db_spk_saw_kopi.ref_user
 CREATE TABLE IF NOT EXISTS `ref_user` (
   `username` char(12) NOT NULL,
@@ -130,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `trx_nilai_alternatif` (
   CONSTRAINT `FK_trx_nilai_alternatif_m_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `m_kriteria` (`id_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=544 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table db_spk_saw_kopi.trx_nilai_alternatif: ~40 rows (approximately)
+-- Dumping data for table db_spk_saw_kopi.trx_nilai_alternatif: ~35 rows (approximately)
 INSERT INTO `trx_nilai_alternatif` (`id_alternatif`, `id_kriteria`, `id_nilai_alternatif`, `nilai_alternatif`) VALUES
 	(1, 2, 84, 7),
 	(1, 3, 85, 8),
