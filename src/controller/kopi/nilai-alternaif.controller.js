@@ -1,9 +1,32 @@
 const { jsonFormat } = require("../../utils/jsonFormat");
 const { statusCode } = require("../../utils/statusCode");
 const { NilaiAlternatif, Alternatif, Kriteria } = require("../../models/kopi");
+const { Sequelize } = require("sequelize");
 
 const findAllNilaiAlternatif = (req, res) => {
-    NilaiAlternatif.findAll()
+    NilaiAlternatif.findAll({
+        attributes: [
+            "id_alternatif",
+            [Sequelize.literal("c.alternatif"), "alternatif"],
+            "id_kriteria",
+            [Sequelize.literal("d.kriteria"), "kriteria"],
+            "id_nilai_alternatif",
+            "nilai_alternatif",
+        ],
+        include: [
+            {
+                model: Alternatif,
+                attributes: [],
+                as: "c"
+            },
+            {
+                model: Kriteria,
+                attributes: [],
+                as: "d"
+            }
+        ],
+        raw: true
+    })
         .then((respon) => {
             if (!respon) {
                 return jsonFormat(res, statusCode.noContent, "failed", "Data tidak ditemukan")
@@ -23,7 +46,32 @@ const findOneNilaiAlternatif = (req, res) => {
     if (!idNilaiAlternatif) {
         return jsonFormat(res, statusCode.found, "failed", "id_nilai_alternatif tidak ditemukan")
     }
-    NilaiAlternatif.findOne({ where: { id_nilai_alternatif: idNilaiAlternatif } })
+    NilaiAlternatif.findOne({
+        where: {
+            id_nilai_alternatif: idNilaiAlternatif
+        },
+        attributes: [
+            "id_alternatif",
+            [Sequelize.literal("c.alternatif"), "alternatif"],
+            "id_kriteria",
+            [Sequelize.literal("d.kriteria"), "kriteria"],
+            "id_nilai_alternatif",
+            "nilai_alternatif",
+        ],
+        include: [
+            {
+                model: Alternatif,
+                attributes: [],
+                as: "c"
+            },
+            {
+                model: Kriteria,
+                attributes: [],
+                as: "d"
+            }
+        ],
+        raw: true
+    })
         .then((respon) => {
             if (!respon) {
                 return jsonFormat(res, statusCode.noContent, "failed", "Data tidak ditemukan")
@@ -219,7 +267,7 @@ const storeNilaiAlternatifPeralternatif = (req, res) => {
                         jsonFormat(res, statusCode.ok, "success", "Berhasil membuat data", postBulk)
                     } catch (error) {
                         console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee : ", error);
-                        
+
                         return jsonFormat(res, statusCode.badRequest, "failed", `Error: gagal membuat data: ${error.name}`)
                     }
                     // })

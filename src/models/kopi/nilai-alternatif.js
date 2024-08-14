@@ -1,5 +1,7 @@
 const db = require("../../config/database");
 const { DataTypes } = require("sequelize");
+const Alternatif = require("./alternatif");
+const Kriteria = require("./kriteria");
 
 const NilaiAlternatif = db.define(
     "NilaiAlternatif",
@@ -27,5 +29,25 @@ const NilaiAlternatif = db.define(
         tableName: 'trx_nilai_alternatif',
     }
 )
+
+Alternatif.hasOne(NilaiAlternatif, {
+    foreignKey: "id_alternatif",
+    as: "a"
+})
+
+NilaiAlternatif.belongsTo(Alternatif, {
+    foreignKey: "id_alternatif",
+    as: "c"
+})
+
+Kriteria.hasOne(NilaiAlternatif, {
+    foreignKey: "id_kriteria",
+    as: "b"
+})
+
+NilaiAlternatif.belongsTo(Kriteria, {
+    foreignKey: "id_kriteria",
+    as: "d"
+})
 
 module.exports = NilaiAlternatif;
