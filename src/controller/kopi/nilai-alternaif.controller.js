@@ -115,7 +115,7 @@ const findOneNilaiAlternatifByAlternatif = (req, res) => {
         raw: true
     })
         .then((respon) => {
-            if (!respon) {
+            if (respon.length === 0) {
                 return jsonFormat(res, statusCode.noContent, "failed", "Data tidak ditemukan")
             }
             return jsonFormat(res, statusCode.ok, "success", "Berhasil memuat data", respon)
@@ -193,7 +193,7 @@ const updateNilaiAlternatif = (req, res) => {
     const idNilaiAlternatif = req.params.id_nilai_alternatif
     const nilaiAlternatif = req.body.nilai_alternatif
     console.log("nilai alternatif : ", nilaiAlternatif);
-    
+
     if (!idNilaiAlternatif) {
         return jsonFormat(res, statusCode.found, "failed", "id_nilai_alternatif dibutuhkan")
     }
@@ -307,6 +307,11 @@ const storeNilaiAlternatifPeralternatif = (req, res) => {
                     //             return jsonFormat(res, statusCode.conflict, "failed", "Data Sudah Ada")
                     //         }
                     try {
+                        await NilaiAlternatif.destroy({
+                            where: {
+                                id_alternatif: idAlternatif
+                            }
+                        })
                         const postBulk = await NilaiAlternatif.bulkCreate(nilaiAlternatif)
                         jsonFormat(res, statusCode.ok, "success", "Berhasil membuat data", postBulk)
                     } catch (error) {

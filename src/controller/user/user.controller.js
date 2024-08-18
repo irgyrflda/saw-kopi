@@ -130,6 +130,10 @@ const logout = (req, res) => {
     })
 }
 
+const getAllUsers = (req, res) => {
+    User.findAll()
+}
+
 module.exports = {
     login,
     register,
