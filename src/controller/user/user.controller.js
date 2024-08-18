@@ -27,11 +27,11 @@ const login = (req, res) => {
             return jsonFormat(res, statusCode.found, "failed", "User tidak ditemukan silahkan coba lagi")
         }
         console.log("satu", respon.password);
-        
+
         const passwordEx = await decryptPassword(respon.password);
 
         console.log("dua");
-        
+
 
         if (passwordEx !== password) {
             return jsonFormat(res, statusCode.badRequest, "failed", "Gagal login silahkan coba lagi")
@@ -131,11 +131,164 @@ const logout = (req, res) => {
 }
 
 const getAllUsers = (req, res) => {
-    User.findAll()
+    const userCreate = req.headers.username
+    User.findOne({
+        where: {
+            username: userCreate
+        }
+    }).then((resCek) => {
+        if (!resCek) {
+            return jsonFormat(res, statusCode.found, "failed", "User create tidak ditemukan")
+        }
+        if (resCek.role !== 'admin') {
+            return jsonFormat(res, statusCode.badRequest, "failed", "Anda bukan admin!!")
+        }
+        User.findAll()
+            .then((respon) => {
+                if (respon.length === 0) {
+                    return jsonFormat(res, statusCode.found, "failed", "User tidak ditemukan")
+                }
+                return jsonFormat(res, statusCode.ok, "success", "Berhasil Memuat Data", respon)
+            }).catch((error) => {
+                console.log("error logout : ", error);
+                throw error;
+            })
+    })
+}
+
+const getByUsername = (req, res) => {
+    const username = req.params.username
+    const userCreate = req.headers.username
+    User.findOne({
+        where: {
+            username: userCreate
+        }
+    }).then((resCek) => {
+        if (!resCek) {
+            return jsonFormat(res, statusCode.found, "failed", "User create tidak ditemukan")
+        }
+        if (resCek.role !== 'admin') {
+            return jsonFormat(res, statusCode.badRequest, "failed", "Anda bukan admin!!")
+        }
+        if (!username) {
+            return jsonFormat(res, statusCode.found, "failed", "Username tidak boleh kosong")
+        }
+        User.findOne({
+            where: {
+                username: username
+            }
+        })
+            .then((respon) => {
+                if (!respon) {
+                    return jsonFormat(res, statusCode.found, "failed", "User tidak ditemukan")
+                }
+                return jsonFormat(res, statusCode.ok, "success", "Berhasil Memuat Data", respon)
+            }).catch((error) => {
+                console.log("error logout : ", error);
+                throw error;
+            })
+    })
+}
+
+const UpdateRoleUsername = (req, res) => {
+    const username = req.params.username
+    const userCreate = req.headers.username
+    User.findOne({
+        where: {
+            username: userCreate
+        }
+    }).then((resCek) => {
+        if (!resCek) {
+            return jsonFormat(res, statusCode.found, "failed", "User create tidak ditemukan")
+        }
+        if (resCek.role !== 'admin') {
+            return jsonFormat(res, statusCode.badRequest, "failed", "Anda bukan admin!!")
+        }
+        if (!username) {
+            return jsonFormat(res, statusCode.found, "failed", "Username tidak boleh kosong")
+        }
+        User.findOne({
+            where: {
+                username: username
+            }
+        })
+            .then((respon) => {
+                if (!respon) {
+                    return jsonFormat(res, statusCode.found, "failed", "User tidak ditemukan")
+                }
+                if (respon.is_login === 1) {
+                    return jsonFormat(res, statusCode.found, "failed", "Pastikan User yang ingin di ubah rolenya logout terlebih dahulu")
+                }
+                const roleNew = (respon.role === 'user') ? 'admin' : 'user';
+                const updateRole = User.update({
+                    role: roleNew
+                }, {
+                    where: {
+                        username: username
+                    }
+                })
+                if (!updateRole) {
+                    return jsonFormat(res, statusCode.found, "failed", "Gagal update role user")
+                }
+                return jsonFormat(res, statusCode.ok, "success", "Berhasil Mengubah role user")
+            }).catch((error) => {
+                console.log("error logout : ", error);
+                throw error;
+            })
+    })
+}
+
+const DeleteRoleUsername = (req, res) => {
+    const username = req.params.username
+    const userCreate = req.headers.username
+    User.findOne({
+        where: {
+            username: userCreate
+        }
+    }).then((resCek) => {
+        if (!resCek) {
+            return jsonFormat(res, statusCode.found, "failed", "User create tidak ditemukan")
+        }
+        if (resCek.role !== 'admin') {
+            return jsonFormat(res, statusCode.badRequest, "failed", "Anda bukan admin!!")
+        }
+        if (!username) {
+            return jsonFormat(res, statusCode.found, "failed", "Username tidak boleh kosong")
+        }
+        User.findOne({
+            where: {
+                username: username
+            }
+        })
+            .then((respon) => {
+                if (!respon) {
+                    return jsonFormat(res, statusCode.found, "failed", "User tidak ditemukan")
+                }
+                if (respon.is_login === 1) {
+                    return jsonFormat(res, statusCode.found, "failed", "Pastikan User yang ingin di ubah rolenya logout terlebih dahulu")
+                }
+                const deleteRole = User.destroy({
+                    where: {
+                        username: username
+                    }
+                })
+                if (!deleteRole) {
+                    return jsonFormat(res, statusCode.found, "failed", "Gagal menghapus user")
+                }
+                return jsonFormat(res, statusCode.ok, "success", "Berhasil menghapus user")
+            }).catch((error) => {
+                console.log("error logout : ", error);
+                throw error;
+            })
+    })
 }
 
 module.exports = {
     login,
     register,
-    logout
+    logout,
+    getAllUsers,
+    getByUsername,
+    UpdateRoleUsername,
+    DeleteRoleUsername
 }

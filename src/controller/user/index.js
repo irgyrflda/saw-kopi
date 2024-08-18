@@ -1,11 +1,19 @@
 const {
     login,
     register,
-    logout
+    logout,
+    getAllUsers,
+    getByUsername,
+    UpdateRoleUsername,
+    DeleteRoleUsername
 } = require('./user.controller');
 
 module.exports = {
     login,
     register,
-    logout
+    logout,
+    getAllUsers,
+    getByUsername,
+    UpdateRoleUsername,
+    DeleteRoleUsername
 }
