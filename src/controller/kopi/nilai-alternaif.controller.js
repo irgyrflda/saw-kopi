@@ -83,6 +83,48 @@ const findOneNilaiAlternatif = (req, res) => {
         })
 }
 
+const findOneNilaiAlternatifByAlternatif = (req, res) => {
+    const idAlternatif = req.params.id_alternatif
+    if (!idAlternatif) {
+        return jsonFormat(res, statusCode.found, "failed", "id_alternatif tidak ditemukan")
+    }
+    NilaiAlternatif.findAll({
+        where: {
+            id_alternatif: idAlternatif
+        },
+        attributes: [
+            "id_alternatif",
+            [Sequelize.literal("c.alternatif"), "alternatif"],
+            "id_kriteria",
+            [Sequelize.literal("d.kriteria"), "kriteria"],
+            "id_nilai_alternatif",
+            "nilai_alternatif",
+        ],
+        include: [
+            {
+                model: Alternatif,
+                attributes: [],
+                as: "c"
+            },
+            {
+                model: Kriteria,
+                attributes: [],
+                as: "d"
+            }
+        ],
+        raw: true
+    })
+        .then((respon) => {
+            if (!respon) {
+                return jsonFormat(res, statusCode.noContent, "failed", "Data tidak ditemukan")
+            }
+            return jsonFormat(res, statusCode.ok, "success", "Berhasil memuat data", respon)
+        }).catch((error) => {
+            console.log("error get all nilai alternatif : ", error);
+            throw error;
+        })
+}
+
 const storeNilaiAlternatif = (req, res) => {
     const nilaiAlternatif = req.body.nilai_alternatif
     const idAlternatif = req.body.id_alternatif
@@ -150,6 +192,8 @@ const storeNilaiAlternatif = (req, res) => {
 const updateNilaiAlternatif = (req, res) => {
     const idNilaiAlternatif = req.params.id_nilai_alternatif
     const nilaiAlternatif = req.body.nilai_alternatif
+    console.log("nilai alternatif : ", nilaiAlternatif);
+    
     if (!idNilaiAlternatif) {
         return jsonFormat(res, statusCode.found, "failed", "id_nilai_alternatif dibutuhkan")
     }
@@ -306,6 +350,7 @@ const destroyNilaiAlternatifByidAlternatif = (req, res) => {
 module.exports = {
     findAllNilaiAlternatif,
     findOneNilaiAlternatif,
+    findOneNilaiAlternatifByAlternatif,
     storeNilaiAlternatif,
     updateNilaiAlternatif,
     destroyNilaiAlternatif,

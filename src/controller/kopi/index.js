@@ -18,6 +18,7 @@ const {
 const {
     findAllNilaiAlternatif,
     findOneNilaiAlternatif,
+    findOneNilaiAlternatifByAlternatif,
     storeNilaiAlternatif,
     updateNilaiAlternatif,
     destroyNilaiAlternatif,
@@ -32,6 +33,7 @@ const {
 module.exports = {
     findAllAlternatif,
     findOneAlternatif,
+    findOneNilaiAlternatifByAlternatif,
     storeAlternatif,
     updateAlternatif,
     destroyAlternatif,

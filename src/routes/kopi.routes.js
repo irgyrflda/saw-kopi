@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
     findAllAlternatif,
     findOneAlternatif,
+    findOneNilaiAlternatifByAlternatif,
     storeAlternatif,
     updateAlternatif,
     destroyAlternatif,
@@ -45,6 +46,7 @@ router.delete("/kriteria/:id_kriteria", cekSecretKey, destroyKriteria);
 //nilai alternatif
 router.get("/nilai-alternatif", cekSecretKey, findAllNilaiAlternatif);
 router.get("/nilai-alternatif/:id_nilai_alternatif", cekSecretKey, findOneNilaiAlternatif);
+router.get("/nilai-alternatif/alternatif/:id_alternatif", cekSecretKey, findOneNilaiAlternatifByAlternatif);
 router.post("/nilai-alternatif", cekSecretKey, storeNilaiAlternatif);
 router.put("/nilai-alternatif/:id_nilai_alternatif", cekSecretKey, updateNilaiAlternatif);
 router.delete("/nilai-alternatif/:id_nilai_alternatif", cekSecretKey, destroyNilaiAlternatif);
