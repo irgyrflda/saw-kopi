@@ -4,7 +4,8 @@ const { User } = require("../../models/user");
 const {
     encryptPassword,
     decryptPassword
-} = require("../../middleware/authorization")
+} = require("../../middleware/authorization");
+const { Op } = require("sequelize");
 const secretKey = process.env.SECRETKEY
 
 const login = (req, res) => {
@@ -134,7 +135,7 @@ const getAllUsers = (req, res) => {
     const userCreate = req.headers.username
     User.findOne({
         where: {
-            username: userCreate
+            username: userCreate,
         }
     }).then((resCek) => {
         if (!resCek) {
@@ -143,7 +144,11 @@ const getAllUsers = (req, res) => {
         if (resCek.role !== 'admin') {
             return jsonFormat(res, statusCode.badRequest, "failed", "Anda bukan admin!!")
         }
-        User.findAll()
+        User.findAll({
+            where: {
+                username: { [Op.not]: userCreate }
+            }
+        })
             .then((respon) => {
                 if (respon.length === 0) {
                     return jsonFormat(res, statusCode.found, "failed", "User tidak ditemukan")
